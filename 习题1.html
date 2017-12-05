@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<style type="text/css">
+			@CHARSET "UTF-8";
+			#total {
+				width: 450px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			ul {
+				list-style-type: none;
+			}
+			
+			li {
+				border-style: solid;
+				border-width: 1px;
+				padding: 5px;
+				margin: 5px;
+				background-color: #99ff99;
+				float: left;
+			}
+			
+			.inner {
+				width: 400px;
+				border-style: solid;
+				border-width: 1px;
+				margin: 10px;
+				padding: 10px;
+				float: left;
+			}
+			
+			#employeeTable {
+				border-spacing: 1px;
+				background-color: black;
+				margin: 80px auto 10px auto;
+			}
+			
+			th,
+			td {
+				background-color: white;
+			}
+			
+			#formDiv {
+				width: 250px;
+				border-style: solid;
+				border-width: 1px;
+				margin: 50px auto 10px auto;
+				padding: 10px;
+			}
+			
+			#formDiv input {
+				width: 100%;
+			}
+			
+			.word {
+				width: 40px;
+			}
+			
+			.inp {
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<table id="employeeTable">
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Salary</th>
+				<th>&nbsp;</th>
+			</tr>
+			<tr>
+				<td>Tom</td>
+				<td>tom@tom.com</td>
+				<td>5000</td>
+				<td>
+					<a href="javascript:;">Delete</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Jerry</td>
+				<td>jerry@sohu.com</td>
+				<td>8000</td>
+				<td>
+					<a href="deleteEmp?id=002">Delete</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Bob</td>
+				<td>bob@tom.com</td>
+				<td>10000</td>
+				<td>
+					<a href="deleteEmp?id=003">Delete</a>
+				</td>
+			</tr>
+		</table>
+
+		<div id="formDiv">
+
+			<h4>添加新员工</h4>
+
+			<table>
+				<tr>
+					<td class="word">name: </td>
+					<td class="inp">
+						<input type="text" name="empName" id="empName" />
+					</td>
+				</tr>
+				<tr>
+					<td class="word">email: </td>
+					<td class="inp">
+						<input type="text" name="email" id="email" />
+					</td>
+				</tr>
+				<tr>
+					<td class="word">salary: </td>
+					<td class="inp">
+						<input type="text" name="salary" id="salary" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button id="addEmpButton" value="abc">
+						Submit
+					</button>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+
+		<script type="text/javascript">
+			//			var aALL = document.getElementsByTagName("a");
+			//			// 1  .这么做 可以获取一组  元素的点击事件  ,   循环一次就会把点击事件 加载到内存中  
+			//
+			//			for(var i = 0; i < aALL.length; i++) {
+			//
+			//				// 循环第一次的时候    	aALL[0] 赋值的
+			//				// 循环第二次的时候       	aALL[1] 赋值的
+			//
+			//				//2 点击事件
+			//				aALL[i].onclick = function() {
+			//
+			//					//  获取     a 的 父元素  是 用的     parentElement   ,获取到了 b元素  ,   那么 b 的父元素  ，也要用这种方式
+			//					//函数中 本身 存在一个 this ,只不过默认不显示 , 谁调用 用函数  ，就 会把自身  传入  函数  ,并赋值个这个    this    ,
+			//
+			//					//3  获取到了  tr 标签  ，   通过  a 标签 获取  到 td  ,在通过 td 标签 获取到   tr 标签 ，
+			//
+			//					var deletetr = this.parentElement.parentElement;
+			//
+			//					//4  直接同 deletetr对象 ，  的父元素 获取到  这个tr 标签的父元素 table 标签   ，，， deletetr.parentElement
+			//					var tab = deletetr.parentElement
+			//
+			//					//5  移除  table 中的  tr 
+			//					tab.removeChild(deletetr);
+			//
+			//					//6   点击时  ，标签本身的跳转  效果被  移除
+			//					return false;
+			//
+			//				}
+			//
+			//			}
+
+			/*
+			    submit 
+			 * 
+			 * */
+
+			var addEmpButton = document.getElementById("addEmpButton");
+
+			addEmpButton.onclick = function() {
+				//1 、 创建tr
+
+				var tr = document.createElement("tr");
+
+				//2  。创建 td 
+
+				var tdName = document.createElement("td");
+
+				var tdEmail = document.createElement("td");
+
+				var tdSalary = document.createElement("td");
+
+				var tdDel = document.createElement("td");
+
+				// 3 创建 文本
+
+				// (1) 在创建文本之前, 应该先获取到 input 中的value  , 创建的name 文本
+
+				var empName = document.getElementById("empName");
+
+				var empNameTxt = document.createTextNode(empName.value);
+
+				// （2） 创建Email 文本
+
+				var email = document.getElementById("email");
+
+				var emailTxt = document.createTextNode(email.value);
+
+				// （3） 创建Salary	 文本
+
+				// 获取标签
+				var salary = document.getElementById("salary");
+
+				// 创建文本
+				var salaryTxt = document.createTextNode(salary.value);
+
+				//(4) 创建  del 文本
+
+				var aNode = document.createElement("a");
+
+				aNode.href = "#";
+
+				var delTxt = document.createTextNode("Delete");
+
+				//4  把文本 搞到 td里 
+
+				tdName.appendChild(empNameTxt);
+
+				tdEmail.appendChild(emailTxt);
+
+				tdSalary.appendChild(salaryTxt);
+
+				//注意顺序
+				aNode.appendChild(delTxt);
+
+				tdDel.appendChild(aNode);
+
+				//5   td 搞到 tr里 
+
+				tr.appendChild(tdName);
+				tr.appendChild(tdEmail);
+				tr.appendChild(tdSalary);
+				tr.appendChild(tdDel);
+
+				//6  在table中添加 tr 
+
+				var table = document.getElementsByTagName("table")[0];
+
+				table.appendChild(tr);
+
+			}
+		</script>
+
+	</body>
+
+</html>
